@@ -1,15 +1,18 @@
 .tomate {
 	padding: 60px;
 	font-size: 30px;
+	font-family: "Helvetica Neue", Helvetica, Arial, "sans-Serif";
 }
 .time {
 	padding: 60px;
 	font-size: 60px;
+	font-family: "Helvetica Neue", Helvetica, Arial, "sans-Serif";
 }
 #pomodoro, #shortBreak, #longBreak {
-	border: solid black 0.5px;
+	border: solid black 0.1px;
 }
 #start, #stop, #reset {
 	padding-left: 30px;
 	padding-right: 30px;
+	border: solid black 0.1px;
 }
