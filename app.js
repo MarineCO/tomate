@@ -10,11 +10,12 @@ $(document).ready(function(){
 			$('#pomodoro').on('click', app.pomodoro);
 			$('#shortBreak').on('click', app.shortBreak);
 			$('#longBreak').on('click', app.longBreak);
-			$('start').on('click', app.start);
-			$('stop').on('click', app.stop);
-			$('reset').on('click', app.reset);
+			$('#start').on('click', app.start);
+			$('#stop').on('click', app.stop);
+			$('#reset').on('click', app.reset);
 		},
 		start: function(){
+			app.stop();
 			app.intervalID = setInterval(function(){
 				app.updateView();
 				app.t--;
@@ -46,6 +47,8 @@ $(document).ready(function(){
 			clearInterval(app.intervalID);
 			app.t;
 			app.updateView();
+			app.pomodoro();
+
 		},
 		pomodoro: function(){
 			app.t = 1500;
