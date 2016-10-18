@@ -3,66 +3,71 @@ $(document).ready(function(){
 	window.app = {
 		t: 1500,
 		intervalID: null,
-		init: function(){
-			app.listeners();
-		},
-		listeners: function(){
-			$('#pomodoro').on('click', app.pomodoro);
-			$('#shortBreak').on('click', app.shortBreak);
-			$('#longBreak').on('click', app.longBreak);
-			$('#start').on('click', app.start);
-			$('#stop').on('click', app.stop);
-			$('#reset').on('click', app.reset);
-		},
-		start: function(){
-			app.stop();
-			app.intervalID = setInterval(function(){
-				app.updateView();
-				app.t--;
-				if (app.t === 0) {
-   					app.stop();
-   				}
-			}, 1000);
-		},
-		updateView: function(min, sec){
-			var minutes = Math.floor(app.t/60);
-			var secondes = app.t % 60;
-			if (minutes < 10 && secondes < 10) {
-   				$('h1').html('0' + minutes + ':' + '0' + secondes);
-   			}
-   			else if (minutes < 10 && secondes >= 10) {
-   				$('h1').html('0' + minutes + ':' + secondes);
-   			}
-   			else if (minutes >= 10 && secondes < 10) {
-   				$('h1').html(minutes + ':' + '0' + secondes);
-   			}
-   			else {
-   				$('h1').html(minutes + ':' + secondes);
-   			}
-		},
-		stop: function(){
-			clearInterval(app.intervalID);
-		},
-		reset: function(){
-			clearInterval(app.intervalID);
-			app.t;
-			app.updateView();
-			app.pomodoro();
 
+		init: function(){
+			this.listeners();
 		},
+
+		listeners: function(){
+			$('#pomodoro').on('click', this.pomodoro.bind(this));
+			$('#shortBreak').on('click', this.shortBreak.bind(this));
+			$('#longBreak').on('click', this.longBreak.bind(this));
+			$('#start').on('click', this.start.bind(this));
+			$('#stop').on('click', this.stop.bind(this));
+			$('#reset').on('click', this.reset.bind(this));
+		},
+
+		start: function(){
+			this.stop();
+			this.intervalID = setInterval(function(){
+				this.updateView();
+				this.t--;
+				if (this.t === 0) {
+					this.stop();
+				}
+			}.bind(this), 1000);
+		},
+
+		updateView: function(min, sec){
+			var minutes = Math.floor(this.t/60);
+			var secondes = this.t % 60;
+			$('h1').html(this.addZero(minutes) + ':' + this.addZero(secondes));
+		},
+
+		addZero: function(nombre){
+			if (nombre < 10) {
+				nombre = '0' + nombre;
+			}
+			return nombre;
+		},
+
+		stop: function(){
+			clearInterval(this.intervalID);
+		},
+
+		reset: function(){
+			clearInterval(this.intervalID);
+			this.t;
+			this.updateView();
+			this.pomodoro();
+		},
+		
 		pomodoro: function(){
-			app.t = 1500;
-			app.updateView();
+			this.t = 1500;
+			this.updateView();
+			$('#reset').show();
 		},
 
 		shortBreak: function(){
-			app.t = 300;
-			app.updateView();
+			this.t = 300;
+			this.updateView();
+			$('#reset').hide();
 		},
 
 		longBreak: function(){
-			app.t = 600;
-			app.updateView();
+			this.t = 600;
+			this.updateView();
+			$('#reset').hide();
 		},
 
 	};
