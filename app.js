@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	"use strict";
 
 	window.app = {
 		t: 1500,
@@ -31,7 +32,7 @@ $(document).ready(function(){
 		updateView: function(min, sec){
 			var minutes = Math.floor(this.t/60);
 			var secondes = this.t % 60;
-			$('h1').html(this.addZero(minutes) + ':' + this.addZero(secondes));
+			$('h2').html(this.addZero(minutes) + ':' + this.addZero(secondes));
 		},
 
 		addZero: function(nombre){
@@ -51,7 +52,7 @@ $(document).ready(function(){
 			this.updateView();
 			this.pomodoro();
 		},
-		
+
 		pomodoro: function(){
 			this.t = 1500;
 			this.updateView();

@@ -3,18 +3,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Tomato</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="semantic-ui/dist/semantic.min.css">
 </head>
 <body>
-	<div>
-		<button id="pomodoro">Pomodoro</button>
-		<button id="shortBreak">Short break</button>
-		<button id="longBreak">Long break</button>
-	</div>
-	<h1>00:00</h1>
-	<div>
-		<button id="start">Start</button>
-		<button id="stop">Stop</button>
-		<button id="reset">Reset</button>
+	<div class="">
+		<div class="ui centered aligned grid">
+			<h1 class="tomate">Tomato-timer</h1>
+		</div>
+		<div class="ui blue buttons centered aligned grid">
+			<button class="ui button" id="pomodoro">Pomodoro</button>
+			<button class="ui button" id="shortBreak">Short break</button>
+			<button class="ui button" id="longBreak">Long break</button>
+		</div>
+		<div class="ui centered aligned grid">
+			<h2 class="time">00:00</h1>
+		</div>
+		<div id="use" class="ui centered aligned grid">
+			<button class="positive ui button" id="start">Start</button>
+			<button class="negative ui button" id="stop">Stop</button>
+			<button class="ui grey button" id="reset">Reset</button>
+		</div>
 	</div>
 
 

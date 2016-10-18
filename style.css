@@ -1,0 +1,15 @@
+.tomate {
+	padding: 60px;
+	font-size: 30px;
+}
+.time {
+	padding: 60px;
+	font-size: 60px;
+}
+#pomodoro, #shortBreak, #longBreak {
+	border: solid black 0.5px;
+}
+#start, #stop, #reset {
+	padding-left: 30px;
+	padding-right: 30px;
+}
