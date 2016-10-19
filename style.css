@@ -8,11 +8,23 @@
 	font-size: 60px;
 	font-family: "Helvetica Neue", Helvetica, Arial, "sans-Serif";
 }
-#pomodoro, #shortBreak, #longBreak {
+.pomodoro.ui.button, .shortBreak.ui.button, .longBreak.ui.button {
 	border: solid black 0.1px;
+}
+.ui.blue.buttons {
+	margin-left: 40px;
+	margin-right: 40px;
+	height: 35px;
 }
 #start, #stop, #reset {
 	padding-left: 30px;
 	padding-right: 30px;
 	border: solid black 0.1px;
 }
+/*#container {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+}*/
+

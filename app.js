@@ -23,7 +23,7 @@ $(document).ready(function(){
 			this.intervalID = setInterval(function(){
 				this.updateView();
 				this.t--;
-				if (this.t === 0) {
+				if (this.t < 0) {
 					this.stop();
 				}
 			}.bind(this), 1000);
@@ -33,6 +33,9 @@ $(document).ready(function(){
 			var minutes = Math.floor(this.t/60);
 			var secondes = this.t % 60;
 			$('h2').html(this.addZero(minutes) + ':' + this.addZero(secondes));
+		},
+
+		progressPieChart: function(){
 		},
 
 		addZero: function(nombre){
