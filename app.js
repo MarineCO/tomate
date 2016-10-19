@@ -2,7 +2,7 @@ $(document).ready(function(){
 	"use strict";
 
 	window.app = {
-		t: 1500,
+		timeSeconds: 1500,
 		intervalID: null,
 
 		init: function(){
@@ -22,16 +22,16 @@ $(document).ready(function(){
 			this.stop();
 			this.intervalID = setInterval(function(){
 				this.updateView();
-				this.t--;
-				if (this.t < 0) {
+				this.timeSeconds--;
+				if (this.timeSeconds < 0) {
 					this.stop();
 				}
 			}.bind(this), 1000);
 		},
 
 		updateView: function(min, sec){
-			var minutes = Math.floor(this.t/60);
-			var secondes = this.t % 60;
+			var minutes = Math.floor(this.timeSeconds/60);
+			var secondes = this.timeSeconds % 60;
 			$('h2').html(this.addZero(minutes) + ':' + this.addZero(secondes));
 		},
 
@@ -51,25 +51,25 @@ $(document).ready(function(){
 
 		reset: function(){
 			clearInterval(this.intervalID);
-			this.t;
+			this.timeSeconds;
 			this.updateView();
 			this.pomodoro();
 		},
 
 		pomodoro: function(){
-			this.t = 1500;
+			this.timeSeconds = 1500;
 			this.updateView();
 			$('#reset').show();
 		},
 
 		shortBreak: function(){
-			this.t = 300;
+			this.timeSeconds = 300;
 			this.updateView();
 			$('#reset').hide();
 		},
 
 		longBreak: function(){
-			this.t = 600;
+			this.timeSeconds = 600;
 			this.updateView();
 			$('#reset').hide();
 		},
