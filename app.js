@@ -2,7 +2,7 @@ $(document).ready(function(){
 	"use strict";
 
 	window.app = {
-		timeSeconds: 1500,
+		timeSeconds: null,
 		intervalID: null,
 		startT: null,
 		maxCount: null,
@@ -25,7 +25,6 @@ $(document).ready(function(){
 			this.startT = this.timeSeconds;
 			this.intervalID = setInterval(function(){
 				this.updateView();
-				this.progress();
 				this.timeSeconds--;
 				if (this.timeSeconds < 0) {
 					this.stop();
@@ -40,24 +39,36 @@ $(document).ready(function(){
 		},
 
 		progress: function(){
-			var val = app.timeSeconds;
-			var circle = $('#svg #bar');
-
-			var r = circle.attr('r');
-			var c = Math.PI * (r * 2);
-			
-			if (val < 0) {
-				val = 0;
-			}
-			if (val > 100) {
-				val = 100;
-			}
-			var percentage = parseInt(((app.startT - val) / app.startT)* c,10);
-
-			circle.css({
-				strokeDashoffset: -percentage
+			var bar = new ProgressBar.Circle('#container', {
+				color: 'black',
+				strokeWidth: 6,
+				trailWidth: 10,
+				easing: 'easeInOut',
+				//duration: 10000,
+				text: {
+				autoStyleContainer: false
+				},
+				from: { color: '#FFD700', width: 10 },
+				to: { color: '#FFFF00', width: 10 },
+				step: function(state, circle) {
+					circle.path.setAttribute('stroke', state.color);
+					circle.path.setAttribute('stroke-width', state.width);
+					var value = (Math.round(circle.value() * 100) + '%');
+					if (value === 0) {
+						circle.setText('0');
+					} else {
+						circle.setText(value);
+					}
+				}
 			});
-			$('#cont').attr('data-pct', val);
+			bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+			bar.text.style.fontSize = '2rem';
+
+			bar.animate(1, {
+				duration: this.timeSeconds * 1135
+			}, function() {
+				location.reload();
+			});
 		},
 
 
@@ -80,20 +91,26 @@ $(document).ready(function(){
 		},
 
 		pomodoro: function(){
+			this.stop();
 			this.timeSeconds = 1500;
 			this.updateView();
+			this.progress();
 			$('#reset').show();
 		},
 
 		shortBreak: function(){
+			this.stop();
 			this.timeSeconds = 300;
 			this.updateView();
+			this.progress();
 			$('#reset').hide();
 		},
 
 		longBreak: function(){
+			this.stop()
 			this.timeSeconds = 600;
 			this.updateView();
+			this.progress();
 			$('#reset').hide();
 		},
 
@@ -109,5 +126,7 @@ $(document).ready(function(){
 	result = secondTimestamp - firstTimestamp;
 
 	console.log(result + "millisecondes");
+
+
 
 });

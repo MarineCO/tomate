@@ -24,13 +24,9 @@
 #use {
 	padding: 20px;
 }
-#svg circle {
-	stroke-dashoffset: 0;
-	transition: stroke-dashoffset 1500s linear;
-	stroke: grey;
-	stroke-width: 1em;
+#container {
+  margin: 30px;
+  width: 200px;
+  height: 150px;
+  position: relative;
 }
-#svg #bar {
-	stroke: #EFFF1E;
-}
-
