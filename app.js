@@ -25,6 +25,7 @@ $(document).ready(function(){
 			this.startT = this.timeSeconds;
 			this.intervalID = setInterval(function(){
 				this.updateView();
+				// this.progress();
 				this.timeSeconds--;
 				if (this.timeSeconds < 0) {
 					this.stop();
@@ -44,9 +45,8 @@ $(document).ready(function(){
 				strokeWidth: 6,
 				trailWidth: 10,
 				easing: 'easeInOut',
-				//duration: 10000,
 				text: {
-				autoStyleContainer: false
+					autoStyleContainer: false
 				},
 				from: { color: '#FFD700', width: 10 },
 				to: { color: '#FFFF00', width: 10 },
@@ -65,7 +65,7 @@ $(document).ready(function(){
 			bar.text.style.fontSize = '2rem';
 
 			bar.animate(1, {
-				duration: this.timeSeconds * 1135
+				duration: (app.timeSeconds--) * 1135
 			}, function() {
 				location.reload();
 			});
