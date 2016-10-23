@@ -4,6 +4,8 @@ $(document).ready(function(){
 	window.app = {
 		timeSeconds: 1500,
 		intervalID: null,
+		startT: null,
+		maxCount: null,
 
 		init: function(){
 			this.listeners();
@@ -20,8 +22,10 @@ $(document).ready(function(){
 
 		start: function(){
 			this.stop();
+			this.startT = this.timeSeconds;
 			this.intervalID = setInterval(function(){
 				this.updateView();
+				this.progress();
 				this.timeSeconds--;
 				if (this.timeSeconds < 0) {
 					this.stop();
@@ -35,8 +39,27 @@ $(document).ready(function(){
 			$('h2').html(this.addZero(minutes) + ':' + this.addZero(secondes));
 		},
 
-		progressPieChart: function(){
+		progress: function(){
+			var val = app.timeSeconds;
+			var circle = $('#svg #bar');
+
+			var r = circle.attr('r');
+			var c = Math.PI * (r * 2);
+			
+			if (val < 0) {
+				val = 0;
+			}
+			if (val > 100) {
+				val = 100;
+			}
+			var percentage = parseInt(((app.startT - val) / app.startT)* c,10);
+
+			circle.css({
+				strokeDashoffset: -percentage
+			});
+			$('#cont').attr('data-pct', val);
 		},
+
 
 		addZero: function(nombre){
 			if (nombre < 10) {
@@ -77,5 +100,14 @@ $(document).ready(function(){
 	};
 
 	app.init();
+
+	var firstTimestamp = new Date().getTime();
+
+	app.start();
+
+	var secondTimestamp = new Date().getTime(),
+	result = secondTimestamp - firstTimestamp;
+
+	console.log(result + "millisecondes");
 
 });
